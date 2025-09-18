@@ -13,3 +13,30 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; }
 .hero { width:100%; border-radius:14px; margin: 8px 0 16px 0; }
 .site-title { display: none !important; }
 .site-footer { border-top:1px solid #eee; margin-top:32px; padding:16px 24px; color:#666; }
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-links {
+  display: flex;
+  gap: 14px;
+}
+
+.social-links a {
+  text-decoration: none;
+}
+
+.social-links img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.social-links img:hover {
+  opacity: 1;
+}
