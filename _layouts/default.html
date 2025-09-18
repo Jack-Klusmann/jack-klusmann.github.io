@@ -1,27 +1,21 @@
 <!-- _layouts/default.html -->
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  {%- if site.theme %}{{ site.theme }}{%- endif %}
 </head>
+
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/projects/' | relative_url }}">Projects</a>
-    </nav>
-  </header>
+  {% include header.html %}
 
   <main class="container">
     {{ content }}
   </main>
 
-  <footer class="site-footer">
-    <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
-  </footer>
+  {% include footer.html %}
 </body>
 </html>
