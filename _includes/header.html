@@ -1,8 +1,17 @@
 <header class="site-header">
-  <div class="wrapper">
-    <nav class="site-nav">
-      <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
-      <a class="page-link" href="{{ '/projects/' | relative_url }}">Projects</a>
+  <div class="wrapper header-content">
+    <div class="logo">
+      <span class="emoji">🤖</span>
+    </div>
+    <nav class="nav-links">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/projects/' | relative_url }}">Projects</a>
+      <a href="https://github.com/jack-klusmann" target="_blank" rel="noopener">
+        <img src="{{ '/assets/github.svg' | relative_url }}" alt="GitHub">
+      </a>
+      <a href="https://www.linkedin.com/in/jack-klusmann/" target="_blank" rel="noopener">
+        <img src="{{ '/assets/linkedin.svg' | relative_url }}" alt="LinkedIn">
+      </a>
     </nav>
   </div>
 </header>
