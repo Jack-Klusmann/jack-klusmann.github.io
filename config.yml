@@ -1,0 +1,21 @@
+# _config.yml
+title: Jack Klusmann
+description: Robotics Researcher / Engineer
+url: https://jack-klusmann.github.io
+theme: minima
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:slug/
+
+minima:
+  social_links:
+    - { platform: github,  user_url: "https://github.com/jack-klusmann" }
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/jack-klusmann/" }
+
+defaults:
+  - scope: { path: "" }
+    values: { layout: default }
+  - scope: { path: "", type: projects }
+    values: { layout: project }

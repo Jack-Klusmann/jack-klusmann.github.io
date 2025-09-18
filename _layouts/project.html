@@ -1,0 +1,20 @@
+<!-- _layouts/project.html -->
+---
+layout: default
+---
+<article class="project">
+  <h1>{{ page.title }}</h1>
+  {%- if page.tags %}<p class="tags">{{ page.tags | join: ' · ' }}</p>{% endif %}
+  {%- if page.hero %}
+    <img class="hero" src="{{ page.hero | relative_url }}" alt="">
+  {%- endif %}
+  {{ content }}
+
+  {%- if page.links %}
+  <div class="links">
+    {%- for l in page.links %}
+      <a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name }}</a>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+</article>
