@@ -60,26 +60,34 @@ body {
   margin: 8px 0 16px 0;
 }
 
-/* -----  Intro section -----  */
+/* ----- Intro section ----- */
 .intro {
   display: flex;
-  align-items: center;
-  gap: 32px;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 40px;
 }
 
+.intro-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.intro-photo {
+  width: 120px;
+  height: auto;
+  border-radius: 0; /* keep it rectangular */
+}
+
+.intro-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
 .intro-text {
-  flex: 2;
-}
-
-.intro-image {
-  flex: 1;
-}
-
-.intro-image img {
-  max-width: 200px;
-  border-radius: 50%;
-  display: block;
+  max-width: 700px;
 }
 
 /* ----- Header ----- */
