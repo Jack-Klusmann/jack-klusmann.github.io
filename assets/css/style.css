@@ -60,6 +60,28 @@ body {
   margin: 8px 0 16px 0;
 }
 
+/* -----  Intro section -----  */
+.intro {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.intro-text {
+  flex: 2;
+}
+
+.intro-image {
+  flex: 1;
+}
+
+.intro-image img {
+  max-width: 200px;
+  border-radius: 50%;
+  display: block;
+}
+
 /* ----- Header ----- */
 .header-content {
   display: flex;
