@@ -63,41 +63,48 @@ body {
 /* ----- Intro section ----- */
 .intro {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 32px;
   margin-bottom: 40px;
 }
 
-.intro-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.intro-photo {
-  width: 120px;
-  height: auto;
-  border-radius: 0; /* keep it rectangular */
-}
-
-.intro-name {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-}
-
 .intro-text {
+  flex: 2;
   max-width: 700px;
 }
 
-/* ----- Header ----- */
+.intro-image {
+  flex: 1;
+}
+
+.intro-image img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 0; /* rectangular */
+  display: block;
+}
+
+/* Header layout */
 .header-content {
   display: flex;
-  justify-content: flex-end; /* push nav to right */
+  align-items: center;
+  justify-content: space-between; /* name left, links right */
   padding: 12px 24px;
   border-bottom: 1px solid #eee;
 }
 
+/* Site title (name) */
+.site-title a {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #000;
+  text-decoration: none;
+}
+.site-title a:hover {
+  color: #444;
+}
+
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -114,6 +121,7 @@ body {
   color: #000;
 }
 
+/* Social icons */
 .nav-links img {
   width: 20px;
   height: 20px;
