@@ -63,7 +63,7 @@ body {
 /* ----- Intro section ----- */
 .intro {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 32px;
   margin-bottom: 40px;
 }
@@ -75,12 +75,15 @@ body {
 
 .intro-image {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .intro-image img {
   max-width: 200px;
   height: auto;
-  border-radius: 0; /* rectangular */
+  border-radius: 0;
   display: block;
 }
 
@@ -88,20 +91,33 @@ body {
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* name left, links right */
+  justify-content: space-between;
   padding: 12px 24px;
   border-bottom: 1px solid #eee;
 }
 
-/* Site title (name) */
+/* Site title */
 .site-title a {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.site-title a:hover {
+  color: #000;
+}
+
+.site-title .name {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #000;
-  text-decoration: none;
 }
-.site-title a:hover {
-  color: #444;
+
+.site-title .tagline {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 400;
 }
 
 /* Nav links */
@@ -137,7 +153,7 @@ body {
 .footer-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* text left, icons right */
+  justify-content: space-between;
   padding: 16px 24px;
   border-top: 1px solid #eee;
   color: #666;
