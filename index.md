@@ -22,6 +22,6 @@ layout: default
   </div>
 
   <div class="intro-image">
-    <img src="{{ '/assets/me.jpeg' | relative_url }}" alt="Jack Klusmann" width="200" height="200" loading="lazy">
+    <img src="{{ '/assets/me.jpeg' | relative_url }}" alt="Jack Klusmann" loading="lazy">
   </div>
 </div>

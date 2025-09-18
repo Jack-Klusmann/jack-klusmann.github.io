@@ -1,5 +1,5 @@
 :root {
-  --max: 960px;
+  --max: 1140px;
   --gap: 16px;
 }
 
@@ -81,7 +81,7 @@ body {
 }
 
 .intro-image img {
-  max-width: 800px;
+  max-width: 400px;
   min-width: 200px;
   height: auto;
   border-radius: 0;
