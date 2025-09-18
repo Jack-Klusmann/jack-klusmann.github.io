@@ -17,12 +17,12 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; }
 .footer-content {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 25px;
 }
 
 .social-links {
   display: flex;
-  gap: 14px;
+  gap: 25px;
 }
 
 .social-links a {
