@@ -1,6 +1,6 @@
 ---
 title: "Specifying Volumes of Interest for Industrial Use Cases"
-authors: "D. Dyrda et al."
+authors: "D. Dyrda, J. Klusmann, L. Rudolph, F. Stieglbauer,  et al."
 venue: "IEEE International Symposium on Mixed and Augmented Reality (ISMAR)"
 location: "Sydney, Australia"
 year: 2023

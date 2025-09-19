@@ -180,3 +180,32 @@ body {
 .social-links img:hover {
   opacity: 1;
 }
+
+/* ----- Publications ----- */
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* space between entries */
+}
+
+.publication {
+  line-height: 1.4;
+}
+
+.pub-title {
+  font-weight: 600;
+  margin: 0;
+}
+
+.pub-authors {
+  margin: 0.2rem 0;
+  color: #555;
+}
+
+.pub-venue,
+.pub-doi {
+  margin: 0.1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
