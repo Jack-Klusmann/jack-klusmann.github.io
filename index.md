@@ -3,7 +3,7 @@ title: About
 layout: default
 ---
 
-# Home
+# About
 
 <div class="intro">
   <div class="intro-text" markdown="1">
