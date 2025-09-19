@@ -16,7 +16,7 @@ In my current project, I am developing a comprehensive end-to-end control framew
 
 I’ve created this site to showcase some of the projects I’ve been working on. I often find it difficult to gauge the real impact of new research just by reading papers or looking at code. My goal here is to give a more application-driven perspective, showing how the methods explored in these projects can open up new possibilities for how humans and robots interact.
 
-Feel free to explore my projects, and reach out if you’d like to connect or learn more!
+Feel free to explore my **[projects](/projects/)**, and reach out if you’d like to connect or learn more!
 
   </div>
 
