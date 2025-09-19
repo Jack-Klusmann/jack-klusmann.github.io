@@ -1,9 +1,10 @@
 ---
 title: "From Signals to Movement"
-short: "Surface-Based EMG Signal Classification for Enhanced Hand Prosthesis Control"
-tags: ["Wearable Robotics", "Deep Learning", "Prosthesis"]
+short: "Surface-based EMG signal classification for enhanced hand prosthesis control."
+tags: ["Wearable Robotics", "Deep Learning", "Prostheses"]
 hero: "/assets/robot.png"
-thumb: "/assets/robot.png"
+thumb: "/assets/prosthesis.jpg"
+weight: 2023
 ---
 
 TODO
