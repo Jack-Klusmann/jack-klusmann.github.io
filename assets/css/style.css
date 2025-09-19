@@ -1,5 +1,5 @@
 :root {
-  --max: 1280px;
+  --max: 1440px;
   --gap: 16px;
 }
 
@@ -70,7 +70,7 @@ body {
 
 .intro-text {
   flex: 2;
-  max-width: 800px;
+  max-width: 880px;
 }
 
 .intro-image {
