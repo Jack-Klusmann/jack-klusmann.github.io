@@ -1,0 +1,29 @@
+<!-- _includes/publication-card.html -->
+<div class="card">
+  <div class="card-body">
+    <h3>
+      {% if publication.doi_url %}
+        <a href="{{ publication.doi_url }}" target="_blank">{{ publication.title }}</a>
+      {% elsif publication.link %}
+        <a href="{{ publication.link }}" target="_blank">{{ publication.title }}</a>
+      {% else %}
+        {{ publication.title }}
+      {% endif %}
+    </h3>
+
+    {% if publication.authors %}
+      <p class="authors">{{ publication.authors }}</p>
+    {% endif %}
+
+    {% if publication.venue %}
+      <p class="venue">
+        {{ publication.venue }}
+        {% if publication.year %} ({{ publication.year }}){% endif %}
+      </p>
+    {% endif %}
+
+    {% if publication.doi_url %}
+      <p class="doi"><a href="{{ publication.doi_url }}" target="_blank">DOI: {{ publication.doi }}</a></p>
+    {% endif %}
+  </div>
+</div>
