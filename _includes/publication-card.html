@@ -1,27 +1,27 @@
 <!-- _includes/publication-card.html -->
-<div class="publication">
-  <p class="pub-title">
-    {% if publication.doi_url %}
-      <a href="{{ publication.doi_url }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
-    {% elsif publication.link %}
-      <a href="{{ publication.link }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
-    {% else %}
-      {{ publication.title }}
+<div class="card publication">
+  <div class="card-body">
+    <h3 class="pub-title">{{ publication.title }}</h3>
+
+    {% if publication.authors %}
+      <p class="pub-authors">{{ publication.authors }}</p>
     {% endif %}
-  </p>
 
-  {% if publication.authors %}
-    <p class="pub-authors">{{ publication.authors }}</p>
-  {% endif %}
+    {% if publication.venue %}
+      <p class="pub-venue">
+        {{ publication.venue }}
+        {% if publication.year %} ({{ publication.year }}){% endif %}
+      </p>
+    {% endif %}
 
-  {% if publication.venue %}
-    <p class="pub-venue">
-      {{ publication.venue }}
-      {% if publication.year %} ({{ publication.year }}){% endif %}
-    </p>
-  {% endif %}
-
-  {% if publication.doi_url %}
-    <p class="pub-doi"><a href="{{ publication.doi_url }}" target="_blank" rel="noopener noreferrer">DOI: {{ publication.doi }}</a></p>
-  {% endif %}
+    {% if publication.doi_url %}
+      <p class="pub-doi">
+        <a href="{{ publication.doi_url }}" target="_blank" rel="noopener noreferrer">DOI: {{ publication.doi }}</a>
+      </p>
+    {% elsif publication.link %}
+      <p class="pub-link">
+        <a href="{{ publication.link }}" target="_blank" rel="noopener noreferrer">View Publication</a>
+      </p>
+    {% endif %}
+  </div>
 </div>
