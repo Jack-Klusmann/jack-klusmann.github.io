@@ -3,6 +3,8 @@ title: Home
 layout: default
 ---
 
+# Home
+
 <div class="intro">
   <div class="intro-text" markdown="1">
 
@@ -10,7 +12,7 @@ Hi, my name is Jack Klusmann. I’m a Master’s student in Robotics, Cognition,
 
 My ambition is to leverage machine learning to create meaningful human–robot interaction and to bring robots into everyday life, both as assistive partners and as intuitive companions.
 
-My current research focuses on soft robotics, robots built from flexible, compliant materials. I believe these systems hold great promise for human-centered robotics: They are adaptable, can handle delicate or irregular objects, and are inherently safe for close interaction with humans. At the same time, their flexibility makes them much harder to control. Unlike rigid robots with predictable joints, soft robots deform continuously, making their behavior difficult to model and pushing us to design entirely new control methods.
+My current research focuses on soft robotics, robots built from flexible, compliant materials. I believe these systems hold great promise for human-centered robotics: They are adaptable, can handle delicate or irregular objects, and are inherently safe for close interaction with humans. At the same time, their flexibility makes their behavior much harder to model than that of rigid robots, pushing us to design entirely new control methods.
 
 In my current project, I am developing a comprehensive end-to-end control framework for a spiral-shaped soft continuum robot, linking user commands directly to robot actuation. This work spans kinematics, dynamics, sim-to-real transfer, and interactive control.
 
