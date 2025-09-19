@@ -8,6 +8,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug/
+  publications:
+    output: true
+    permalink: /publications/:slug/
 
 minima:
   social_links:
