@@ -1,12 +1,15 @@
 ---
 layout: default
 ---
+
+<div class="project-hero" style="background-image: url('{{ page.hero }}');">
+  <div class="overlay">
+    <h1>{{ page.title }}</h1>
+    {%- if page.tags %}<p class="tags">{{ page.tags | join: ' · ' }}</p>{% endif %}
+  </div>
+</div>
+
 <article class="project">
-  <h1>{{ page.title }}</h1>
-  {%- if page.tags %}<p class="tags">{{ page.tags | join: ' · ' }}</p>{% endif %}
-  {%- if page.hero %}
-    <!-- <img class="hero" src="{{ page.hero | relative_url }}" alt=""> -->
-  {%- endif %}
   {{ content }}
 
   {%- if page.links %}
