@@ -74,34 +74,64 @@ This AR interaction pipeline demonstrates a practical and scalable way to mainta
 
 ## Media
 
-### Application Workflow
-![VOI Workflow Step 1](/assets/voi/voi_1.png)  
-*Initialization: marker scan for device localization.*
+<div class="grid media-grid">
 
-![VOI Workflow Step 2](/assets/voi/voi_2.png)  
-*Capturing images of the component from multiple angles.*
+  <figure>
+    <img src="/assets/voi/voi_1.png" alt="Camera Tab">
+    <figcaption>The app opens on the camera tab, with settings [1], camera [2], and photos [3] buttons.</figcaption>
+  </figure>
 
-![VOI Workflow Step 3](/assets/voi/voi_3.png)  
-*Tracing component silhouettes directly on the tablet.*
+  <figure>
+    <img src="/assets/voi/voi_2.png" alt="AR Marker">
+    <figcaption>The system outlines the Vuforia AR marker [4] when recognized.</figcaption>
+  </figure>
 
-![VOI Workflow Step 4](/assets/voi/voi_4.png)  
-*Intersecting multiple silhouettes to carve out a 3D volume.*
+  <figure>
+    <img src="/assets/voi/voi_3.png" alt="Settings Tab">
+    <figcaption>The settings tab allows the user to visualize AR computations if needed [5][6][7].</figcaption>
+  </figure>
 
-![VOI Workflow Step 5](/assets/voi/voi_5.png)  
-*Previewing the reconstructed volume as a voxel representation.*
+  <figure>
+    <img src="/assets/voi/voi_4.png" alt="Settings Tab">
+    <figcaption>The settings tab also lets the user manually specify the area of interest [8].</figcaption>
+  </figure>
 
-![VOI Workflow Step 6](/assets/voi/voi_6.png)  
-*Adaptive refinement of volume using octree subdivision.*
+  <figure>
+    <img src="/assets/voi/voi_5.png" alt="Settings Tab">
+    <figcaption>Users can manually set the object size [9] and control the voxel mesh granularity [10]–[15].</figcaption>
+  </figure>
 
-![VOI Workflow Step 7](/assets/voi/voi_7.png)  
-*Exporting the generated mesh (e.g., glTF format) for integration with CAD/digital twins.*
+  <figure>
+    <img src="/assets/voi/voi_6.png" alt="Drawing Tab">
+    <figcaption>After capturing a photo, the user can annotate the volume of interest, outlined in yellow [16], and edit if needed [17-19].</figcaption>
+  </figure>
 
-### User Study & Results
-![VOI Workflow Step 8](/assets/voi/voi_8.png)  
-*Example annotated plant components (small, medium, large) used in the user study.*
+  <figure>
+    <img src="/assets/voi/voi_7.png" alt="Drawing Tab">
+    <figcaption>The user captures images and annotates them from multiple angles.</figcaption>
+  </figure>
 
-![VOI Workflow Step 9](/assets/voi/voi_9.png)  
-*User interface and AR visualization of a completed Volume of Interest.*
+  <figure>
+    <img src="/assets/voi/voi_8.png" alt="Drawing Tab">
+    <figcaption>The user captures images and annotates them from multiple angles.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/voi/voi_9.png" alt="Photos Tab">
+    <figcaption>In the photos tab, the user can view annotations [20], continue editing [21]–[23], or begin mesh reconstruction [24].</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/voi/voi_10.png" alt="Photos Tab">
+    <figcaption>Mesh reconstruction takes up to 5 seconds to calculate.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/voi/voi_11.png" alt="3D Reconstruction">
+    <figcaption>The 3D mesh reconstruction of the volume of interest is shown in AR, where it can be further refined until satisfactory.</figcaption>
+  </figure>
+
+</div>
 
 **Links:**
 [IEEE ISMAR 2023 Paper](https://ieeexplore.ieee.org/document/10308192)

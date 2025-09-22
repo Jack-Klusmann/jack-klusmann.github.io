@@ -209,3 +209,26 @@ body {
   color: #666;
   font-size: 0.9rem;
 }
+
+/* ----- Media ----- */
+
+.media-grid figure {
+  margin: 0;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.media-grid img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.media-grid figcaption {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: #555;
+}
