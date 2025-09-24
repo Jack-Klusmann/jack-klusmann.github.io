@@ -7,15 +7,6 @@ thumb: "/assets/origami.png"
 weight: 2024
 ---
 
----
-title: "Explorations in Soft Robotics"
-short: "Hands-on experiments with grippers, actuators, and soft sensors."
-tags: ["Soft Robotics", "Grippers", "Continuum Robots", "Sensors"]
-hero: "/assets/soft_robotics.png"
-thumb: "/assets/soft_robotics.png"
-weight: 2024
----
-
 ## Motivation  
 Soft robotics takes a very different approach to building robots than rigid robotics: instead of metal arms and grippers, it uses **flexible and compliant materials** that bend, stretch, and conform to whatever they touch. This opens up entirely new possibilities, enabling robots to handle fragile objects without breaking them, adapt to irregular shapes, and interact safely alongside people.
 
@@ -61,7 +52,7 @@ These experiments showed how different design strategies trade off **precision v
   </figure>
 
   <figure>
-    <img src="/assets/soft/initial.jpeg" alt="Tentacle Gripper">
+    <img src="/assets/soft/initial.png" alt="Tentacle Gripper">
     <figcaption>Preliminary design of a tentacle-like gripper.</figcaption>
   </figure>
 
@@ -110,16 +101,47 @@ These experiments showed that, unlike rigid grippers that require carefully plan
 
 ## Experiment 3: Modeling with Piecewise Constant Curvature
 ### Approach
-I implemented the **Piecewise Constant Curvature (PCC) method** in Python to model a continuum actuator.  
-This involved actuator-specific mappings (string lengths → arc parameters) and actuator-independent mappings (arc parameters → 3D pose using DH parameters).  
+We implemented the **Piecewise Constant Curvature (PCC) method** in Python to approximate the kinematics of a continuum actuator. The idea is to simplify the continuous deformation of a soft arm into circular arcs, each described by three parameters: curvature, arc length, and bending direction.
 
-### Application
-The PCC framework provides a **computationally efficient model** for soft continuum robots, making real-time simulation and control feasible.  
+To build this step by step, we first defined the Denavit–Hartenberg (DH) transformations that would allow us to compute the pose of an arc in 3D space. We then created functions to generate arcs from given curvature parameters and visualize them, which gave us immediate feedback on whether our representation matched the expected shapes.
+
+With this foundation, we implemented the two mappings central to PCC:
+- **Actuator-specific mapping (actuator space → configuration space):** converting tendon (string) lengths into arc parameters.
+- **Actuator-independent mapping (configuration space → task space):** using DH transformations to convert arc parameters into the 3D pose of the actuator tip.
+
+Finally, we tested the reverse direction by implementing the inverse mappings, which allowed us to start from a target tip pose, calculate the corresponding arc parameters, and then map those back to tendon lengths. After validating this for a single arc, we extended the framework to two arcs and visualized more complex shapes such as C- and S-bends.
 
 ### Findings
-- The model reproduced realistic bending motions using only a few arc parameters.  
-- Forward and inverse kinematics were consistent, validating the mapping.  
-- Extending from one to two actuator sections illustrated how multi-segment soft arms can be controlled.  
+- The single-section model reproduced smooth, realistic bending motions with only three arc parameters.
+- Running forward and inverse mappings consistently returned the same tendon lengths, confirming that both transformations were implemented correctly.
+- Extending to two arcs showed how more complex shapes (such as C- and S-bends) can be represented, making the method scalable to multi-section soft arms.
+
+### Application
+The PCC framework gave us a way to approximate continuum robots without the heavy computations of full physics models such as Cosserat rods. Instead of solving partial differential equations for every material property, we only needed a few arc parameters to describe the actuator’s shape. This made the model lightweight enough to run interactively, which is essential for fast simulation or real-time control.
+
+At the same time, PCC improves on purely geometric splining approaches. While splines can generate smooth shapes, their parameters lack direct physical meaning. In contrast, PCC describes each section with arc parameters that correspond directly to actuation inputs such as tendon lengths or pressures. This makes the representation not only efficient to compute but also physically interpretable and more useful for control.
+
+Overall, PCC provided a balanced approach: computationally simple enough for practical use, yet structured enough to capture the key behaviors of continuum robots.  
+
+### Media
+<div class="grid media-grid">
+
+  <figure>
+    <img src="/assets/soft/single_arc.png" alt="Granular Jamming Gripper">
+    <figcaption>PCC model for a single actuator arc.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/double_arc_c.png" alt="Granular Jamming Gripper">
+    <figcaption>PCC model of a two-section actuator forming a C-shape.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/double_arc_s.png" alt="Granular Jamming Gripper">
+    <figcaption>PCC model of a two-section actuator forming an S-shape.</figcaption>
+  </figure>
+
+</div>
 
 
 ## Experiment 4: Measuring Actuator Force
