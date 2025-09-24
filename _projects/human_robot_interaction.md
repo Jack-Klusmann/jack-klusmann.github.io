@@ -1,5 +1,5 @@
 ---
-title: "Intuitive Control of Rigid–Soft Robots in Mixed Reality"
+title: "Controlling of Rigid–Soft Robots in Mixed Reality"
 short: "Details coming late October 2025."
 tags: ["Human-Robot Interaction", "Soft Robotics", "Mixed Reality"]
 hero: "/assets/construction.png"
