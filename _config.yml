@@ -21,3 +21,5 @@ defaults:
     values: { layout: default }
   - scope: { path: "", type: projects }
     values: { layout: project }
+
+noindex: true
