@@ -146,16 +146,51 @@ Overall, PCC provided a balanced approach: computationally simple enough for pra
 
 ## Experiment 4: Measuring Actuator Force
 ### Approach
-I set up an Arduino-based system with a load cell to perform **blocked-tip force measurements** on pneumatic actuators.  
-Automatic pressurization/depressurization cycles were run at different frequencies (0.1 Hz, 0.2 Hz, 1 Hz).  
-
-### Application
-Measuring blocked-tip force provides insights into the **power output and efficiency** of soft actuators, relevant for grasping and manipulation tasks.  
+We built an Arduino-based setup with a load cell to perform **blocked-tip force measurements** on pneumatic actuators.  
+In this method, the actuator tip is fixed in place so that all generated force is transferred directly to the sensor. We programmed automatic pressurization and depressurization cycles at three different frequencies (0.1 Hz, 0.2 Hz, 1 Hz) and recorded the corresponding pressure–force curves.
 
 ### Findings
-- Clear **hysteresis** appeared between loading and unloading due to material elasticity and air dynamics.  
-- At higher frequencies, maximum force output dropped and lag increased.  
-- Lower frequencies allowed equilibrium and yielded more stable force–pressure curves.  
+- The measurements revealed clear **hysteresis** between loading and unloading, caused by material elasticity and airflow dynamics.
+- At higher frequencies (1 Hz), the actuator could not reach equilibrium, leading to lower peak forces and noticeable lag.
+- At lower frequencies (0.1–0.2 Hz), the actuator had more time to stabilize, resulting in smoother and more consistent curves.
+
+### Application
+Blocked-tip force measurements are a standard way to evaluate the **force capacity and efficiency** of soft actuators. They provide a baseline for comparing different actuator designs and highlight trade-offs between speed, stability, and maximum output — insights directly relevant for grasping and manipulation tasks.  
+
+### Media
+<div class="grid media-grid">
+
+  <figure>
+    <img src="/assets/soft/0_1HzS.jpg" alt="Hysteresis curve at 0.1 Hz">
+    <figcaption>Hysteresis curve for 0.1 Hz cycle frequency.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/0_1HzT.jpg" alt="Time progression at 0.1 Hz">
+    <figcaption>Timely progression of pressure and force at 0.1 Hz.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/0_2HzS.jpg" alt="Hysteresis curve at 0.2 Hz">
+    <figcaption>Hysteresis curve for 0.2 Hz cycle frequency.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/0_2HzT.jpg" alt="Time progression at 0.2 Hz">
+    <figcaption>Timely progression of pressure and force at 0.2 Hz.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/1HzS.jpg" alt="Hysteresis curve at 1 Hz">
+    <figcaption>Hysteresis curve for 1 Hz cycle frequency.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/1HzT.jpg" alt="Time progression at 1 Hz">
+    <figcaption>Timely progression of pressure and force at 1 Hz.</figcaption>
+  </figure>
+
+</div>
 
 
 ## Experiment 5: Soft Fluidic Strain Sensor
