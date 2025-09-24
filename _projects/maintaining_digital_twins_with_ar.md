@@ -8,7 +8,7 @@ weight: 2022
 ---
 
 ## Motivation
-In recent years, industrial companies—especially those in chemicals, energy, and manufacturing—have become increasingly interested in creating **digital twins** of their facilities. These twins can be used to monitor equipment health, plan maintenance or inspections, and train workers in a safe virtual environment.
+In recent years, industrial companies (especially those in chemicals, energy, and manufacturing) have become increasingly interested in creating **digital twins** of their facilities. These twins can be used to monitor equipment health, plan maintenance or inspections, and train workers in a safe virtual environment.
 
 The challenge, however, is keeping these twins accurate and up to date. Industrial facilities are constantly changing: new pipes are added, equipment is replaced, scaffolding goes up or comes down, and the digital twin has to reflect all of it. One way to support this maintenance is by allowing workers to mark specific areas or equipment that need attention, a process often referred to as **Volume of Interest (VoI) annotation**.
 
