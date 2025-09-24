@@ -7,7 +7,7 @@ thumb: "/assets/origami.png"
 weight: 2024
 ---
 
-## Motivation  
+## Motivation
 Soft robotics takes a very different approach to building robots than rigid robotics: instead of metal arms and grippers, it uses **flexible and compliant materials** that bend, stretch, and conform to whatever they touch. This opens up entirely new possibilities, enabling robots to handle fragile objects without breaking them, adapt to irregular shapes, and interact safely alongside people.
 
 With these promises also come challenges. Soft robots are difficult to model, since they do not have predictable joints. Their actuation mechanisms can be unreliable or slow. Measuring forces and sensing motion often requires inventing new components from scratch. And ultimately, integrating all of this into a working system means rethinking how we design, control, and evaluate robots.
@@ -26,7 +26,7 @@ Together, these experiments gave us a practical foundation in how **design, actu
 We built two vacuum-driven grippers with very different design inspirations:
 - An **origami “magic ball”** structure that contracts uniformly around objects.
 - A **tentacle-like gripper** inspired by jellyfish, intended to entangle and latch onto objects.
-We built the origami designs and embedded them in vacuum plastic bags that could be inflated and deflated using a motor. Deflating causes the gripper to close and grasp, while inflating allows it to open and relax.  
+We built the origami designs and embedded them in vacuum plastic bags that could be inflated and deflated using a motor. Deflating causes the gripper to close and grasp, while inflating allows it to open and relax.
 
 We tested the grippers on objects of different sizes and shapes and measured their force–pressure characteristics.
 
@@ -121,23 +121,23 @@ The PCC framework gave us a way to approximate continuum robots without the heav
 
 At the same time, PCC improves on purely geometric splining approaches. While splines can generate smooth shapes, their parameters lack direct physical meaning. In contrast, PCC describes each section with arc parameters that correspond directly to actuation inputs such as tendon lengths or pressures. This makes the representation not only efficient to compute but also physically interpretable and more useful for control.
 
-Overall, PCC provided a balanced approach: computationally simple enough for practical use, yet structured enough to capture the key behaviors of continuum robots.  
+Overall, PCC provided a balanced approach: computationally simple enough for practical use, yet structured enough to capture the key behaviors of continuum robots.
 
 ### Media
 <div class="grid media-grid">
 
   <figure>
-    <img src="/assets/soft/single_arc.png" alt="Granular Jamming Gripper">
+    <img src="/assets/soft/single_arc.png" alt="Single-Section Actuator">
     <figcaption>PCC model for a single actuator arc.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/soft/double_arc_c.png" alt="Granular Jamming Gripper">
+    <img src="/assets/soft/double_arc_c.png" alt="Two-Section Actuator (C)">
     <figcaption>PCC model of a two-section actuator forming a C-shape.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/soft/double_arc_s.png" alt="Granular Jamming Gripper">
+    <img src="/assets/soft/double_arc_s.png" alt="Two-Section Actuator (S)">
     <figcaption>PCC model of a two-section actuator forming an S-shape.</figcaption>
   </figure>
 
@@ -146,7 +146,7 @@ Overall, PCC provided a balanced approach: computationally simple enough for pra
 
 ## Experiment 4: Measuring Actuator Force
 ### Approach
-We built an Arduino-based setup with a load cell to perform **blocked-tip force measurements** on pneumatic actuators.  
+We built an Arduino-based setup with a load cell to perform **blocked-tip force measurements** on pneumatic actuators.
 In this method, the actuator tip is fixed in place so that all generated force is transferred directly to the sensor. We programmed automatic pressurization and depressurization cycles at three different frequencies (0.1 Hz, 0.2 Hz, 1 Hz) and recorded the corresponding pressure–force curves.
 
 ### Findings
@@ -155,7 +155,7 @@ In this method, the actuator tip is fixed in place so that all generated force i
 - At lower frequencies (0.1–0.2 Hz), the actuator had more time to stabilize, resulting in smoother and more consistent curves.
 
 ### Application
-Blocked-tip force measurements are a standard way to evaluate the **force capacity and efficiency** of soft actuators. They provide a baseline for comparing different actuator designs and highlight trade-offs between speed, stability, and maximum output — insights directly relevant for grasping and manipulation tasks.  
+Measuring blocked-tip force gave us a clear sense of how much output a soft actuator can actually deliver. It provided a useful baseline to compare different actuator designs and helped us see how speed, stability, and maximum force are linked. These observations are directly relevant for deciding how such actuators could be used in grasping and manipulation tasks.
 
 ### Media
 <div class="grid media-grid">
@@ -166,18 +166,8 @@ Blocked-tip force measurements are a standard way to evaluate the **force capaci
   </figure>
 
   <figure>
-    <img src="/assets/soft/0_1HzT.jpg" alt="Time progression at 0.1 Hz">
-    <figcaption>Timely progression of pressure and force at 0.1 Hz.</figcaption>
-  </figure>
-
-  <figure>
     <img src="/assets/soft/0_2HzS.jpg" alt="Hysteresis curve at 0.2 Hz">
     <figcaption>Hysteresis curve for 0.2 Hz cycle frequency.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="/assets/soft/0_2HzT.jpg" alt="Time progression at 0.2 Hz">
-    <figcaption>Timely progression of pressure and force at 0.2 Hz.</figcaption>
   </figure>
 
   <figure>
@@ -185,23 +175,39 @@ Blocked-tip force measurements are a standard way to evaluate the **force capaci
     <figcaption>Hysteresis curve for 1 Hz cycle frequency.</figcaption>
   </figure>
 
-  <figure>
-    <img src="/assets/soft/1HzT.jpg" alt="Time progression at 1 Hz">
-    <figcaption>Timely progression of pressure and force at 1 Hz.</figcaption>
-  </figure>
-
 </div>
 
 
 ## Experiment 5: Soft Fluidic Strain Sensor
 ### Approach
-I fabricated a **biocompatible strain sensor** by injecting an electrolyte solution into a silicone tube and sealing electrodes at both ends.  
-The sensor was connected to a comparator-based relaxation oscillator, and resistance changes were measured as signal period shifts on an oscilloscope.  
+We built a **soft fluidic strain sensor** from scratch. To prepare the conductive medium, we mixed potassium iodide (KI) with glycerol until we obtained a uniform electrolyte solution. We then injected this KI–glycerol mixture into a thin silicone tube, and sealed the electrodes at both ends with thread to prevent leakage. This created a flexible, conductive channel whose resistance would change under strain.
 
-### Application
-Such sensors can be embedded into soft robots or wearable systems, providing **real-time strain feedback** with high compliance and low cost.  
+To measure its behavior, we connected the sensor to a comparator-based relaxation oscillator. In this setup, the sensor acted as the resistor in an RC circuit, so stretching the tube directly changed the oscillation period. We monitored the output on an oscilloscope and compared the signal in relaxed and stretched states. This allowed us to see in real time how mechanical deformation was translated into an electrical signal.
 
 ### Findings
-- Stretching the tube increased resistance, which directly increased the oscillation period.  
-- Resistance changed by ~1.6 MΩ between relaxed and stretched states.  
-- The measured strain (~18%) matched the theoretical model derived from resistance scaling.
+- Stretching the tube increased resistance, which lengthened the oscillation period of the circuit.
+- We observed a resistance increase of about 1.6 MΩ between the relaxed and stretched states.
+- The calculated strain was roughly 18%, which aligned well with the theoretical scaling model we had derived.
+
+### Application
+This experiment showed us how a simple fluidic sensor can translate mechanical strain into a measurable electrical signal. Because the sensor bends and stretches with the material, it could be embedded into a soft actuator or even worn on the body without adding bulk. Its compliance and biocompatibility make it a practical option for human–robot interaction, where rigid electronics would be limiting or uncomfortable.
+
+### Media
+<div class="grid media-grid">
+
+  <figure>
+    <img src="/assets/soft/setup.jpeg" alt="Sensor conditioning circuit setup">
+    <figcaption>Setup of the conditioning circuit used to measure the soft strain sensor.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/unstrained.jpg" alt="Oscilloscope output for unstrained tube">
+    <figcaption>Oscilloscope output for the sensor in the unstrained state.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/soft/strained.jpg" alt="Oscilloscope output for strained tube">
+    <figcaption>Oscilloscope output for the sensor in the strained state.</figcaption>
+  </figure>
+
+</div>
