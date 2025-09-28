@@ -117,7 +117,7 @@ Finally, we tested the reverse direction by implementing the inverse mappings, w
 - Extending to two arcs showed how more complex shapes (such as C- and S-bends) can be represented, making the method scalable to multi-section soft arms.
 
 ### Application
-The PCC framework gave us a way to approximate continuum robots without the heavy computations of full physics models such as Cosserat rods. Instead of solving partial differential equations for every material property, we only needed a few arc parameters to describe the actuator’s shape. This made the model lightweight enough to run interactively, which is essential for fast simulation or real-time control.
+The PCC framework gave us a way to approximate continuum robots without the heavy computations of full physics models such as Cosserat rods. Instead of solving partial differential equations for every material property, we only needed a few arc parameters to describe the actuator's shape. This made the model lightweight enough to run interactively, which is essential for fast simulation or real-time control.
 
 At the same time, PCC improves on purely geometric splining approaches. While splines can generate smooth shapes, their parameters lack direct physical meaning. In contrast, PCC describes each section with arc parameters that correspond directly to actuation inputs such as tendon lengths or pressures. This makes the representation not only efficient to compute but also physically interpretable and more useful for control.
 

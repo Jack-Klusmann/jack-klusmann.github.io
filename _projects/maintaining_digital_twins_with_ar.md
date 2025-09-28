@@ -52,7 +52,7 @@ We evaluated the system through a **user study with 15 engineering students** in
 ### Qualitative Feedback
 - Participants found the **annotation process intuitive and effective**, even without prior AR training.
 - The **3D previews** were appreciated as a way to check annotation quality before finalizing.
-- The **main limitation** was the tablet’s size and weight. Users with smaller hand spans in particular suggested that a smartphone version could be more ergonomic.
+- The **main limitation** was the tablet's size and weight. Users with smaller hand spans in particular suggested that a smartphone version could be more ergonomic.
 
 ### Expert Feedback
 Industry engineers also saw potential for additional use cases, such as:
