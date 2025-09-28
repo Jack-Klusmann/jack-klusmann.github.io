@@ -32,6 +32,11 @@ This experiment established the first functional bridge between **perception and
 ### Media
 <div class="grid media-grid">
 
+  <figure>
+    <img src="/assets/nao/nao.jpeg" alt="NAO">
+    <figcaption>The NAO robot used in our experiments.</figcaption>
+  </figure>
+
 </div>
 
 
@@ -40,10 +45,10 @@ This experiment established the first functional bridge between **perception and
 To give NAO the ability to reach for objects based on vision, we explored two learning methods for mapping **2D visual input (blob position)** to **motor output (shoulder joint angles)**:
 
 1. **Feedforward Neural Network (MLP):**
-We implemented a lightweight multi-layer perceptron in NumPy from scratch, including custom layers, loss functions, and gradient-based optimization. Training data was collected by manually guiding NAO’s arm to objects and recording 100 pairs of blob positions and shoulder angles. Both input and output were normalized to [0,1] before training.
+We implemented a lightweight multi-layer perceptron in NumPy from scratch, including custom layers, loss functions, and gradient-based optimization. Training data was collected by manually guiding NAO's arm to objects and recording 100 pairs of blob positions and shoulder angles. Both input and output were normalized to [0,1] before training.
 
 2. **Cerebellar Model Articulation Controller (CMAC):**
-Inspired by the human cerebellum’s role in motor learning, the CMAC discretizes the continuous input space into a grid of overlapping receptive fields. Each input activates a small subset of these fields, and the corresponding table entries are combined to produce the output. Because only a fraction of the table is updated at each step, the network learns quickly while still generalizing to nearby inputs. We trained the CMAC with 100 samples and systematically varied the receptive field size to study how it affects accuracy (precision vs. smoothness of the mapping).
+Inspired by the human cerebellum's role in motor learning, the CMAC discretizes the continuous input space into a grid of overlapping receptive fields. Each input activates a small subset of these fields, and the corresponding table entries are combined to produce the output. Because only a fraction of the table is updated at each step, the network learns quickly while still generalizing to nearby inputs. We trained the CMAC with 100 samples and systematically varied the receptive field size to study how it affects accuracy (precision vs. smoothness of the mapping).
 
 Both models were integrated into the ROS framework so that the learned mappings could run in real time on the NAO robot.
 
@@ -56,8 +61,8 @@ Both models were integrated into the ROS framework so that the learned mappings 
 - **CMAC:**
   - Converged faster than the MLP, achieving lower mean squared error with the same training data.
   - Performance strongly depended on receptive field size:
-    - Small fields improved precision but reduced generalization.
-    - Larger fields smoothed the mapping but introduced systematic error.
+    - Small fields improved precision but reduced generalization, often making the robot's movements appear jittery as it overreacted to small input changes.
+    - Larger fields smoothed the mapping and produced much more fluid motions, though at the cost of accuracy and some systematic error.
   - Provided a more interpretable structure compared to the dense MLP.
 
 ### Application
@@ -66,6 +71,16 @@ Both models were integrated into the ROS framework so that the learned mappings 
 
 ### Media
 <div class="grid media-grid">
+
+  <figure>
+    <img src="/assets/nao/low.gif" alt="CMAC (small receptive field)">
+    <figcaption>Ball-following with a small receptive field.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/nao/high.gif" alt="CMAC (large receptive field)">
+    <figcaption>Ball-following with a large receptive field.</figcaption>
+  </figure>
 
 </div>
 
@@ -95,17 +110,17 @@ This experiment showed us how reinforcement learning can be applied to **embodie
 <div class="grid media-grid">
 
   <figure>
-    <img src="/assets/nao/nao_right.gif" alt="Nao kicking right">
+    <img src="/assets/nao/nao_right.gif" alt="NAO kicking right">
     <figcaption>NAO performing a penalty kick to the right.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/nao/nao_middle.gif" alt="Nao kicking middle">
+    <img src="/assets/nao/nao_middle.gif" alt="NAO kicking middle">
     <figcaption>NAO performing a penalty kick straight to the middle.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/nao/nao_whoops.gif" alt="Nao losing balance while kicking ;(">
+    <img src="/assets/nao/nao_whoops.gif" alt="NAO losing balance while kicking ;(">
     <figcaption>NAO losing balance after the kick :').</figcaption>
   </figure>
 
