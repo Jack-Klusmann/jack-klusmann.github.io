@@ -34,7 +34,7 @@ This experiment established the first functional bridge between **perception and
 
   <figure>
     <img src="/assets/nao/nao.jpeg" alt="NAO">
-    <figcaption>The NAO robot used in our experiments.</figcaption>
+    <figcaption>A NAO robot :).</figcaption>
   </figure>
 
 </div>
