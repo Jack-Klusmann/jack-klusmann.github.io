@@ -65,14 +65,14 @@ We built a **granular jamming gripper** by filling a balloon with coffee grounds
 
 We tested several variations:
 - **Granular material:** Coffee grounds vs. dry rice.
-- **Surface friction:** With and without adhevsie rubber dots on the membrane.
+- **Surface friction:** With and without adhesive rubber dots on the membrane.
 - **Quantity:** Different amounts of filling to study sealing and conformity.
 
 ### Findings
 - Gripping relied on a combination of **friction, suction, and geometric interlocking**.
 - **Coffee grounds** performed better than rice because their smaller grain size improved conformity.
 - Force–pressure curves followed mostly linear trends for coffee, while rice introduced nonlinear effects.
-- Adding **adhevsive rubber** increased surface friction, broadening the range of graspable objects.
+- Adding **adhesive rubber** increased surface friction, broadening the range of graspable objects.
 - Objects with crevices, irregular shapes, or protrusions were the easiest to grasp.
 
 ### Application
