@@ -16,20 +16,18 @@ Interest has grown in leveraging **machine learning** to develop more advanced m
 
 I had the opportunity to contribute to the development of a prosthetic hand for the **ETH Zurich Cybathlon Arm Prosthesis Race**, where competitors complete practical tasks such as carrying a crate of bottles, screwing in a light bulb, or zipping up a jacket using their prosthesis. As part of the perception group of my university's team, my primary responsibility was to design a **robust deep-learning-based classification pipeline** capable of translating surface EMG signals into discrete commands in real time and converting them into functional hand poses. The system was designed to run directly on the prosthesis hardware, ensuring smooth and natural grasp transitions. To evaluate the complete system, we had the chance to test the prosthesis together with an amputee. This experience allowed us to better understand and design a control system that feels intuitive, comfortable, and reliable for the user.
 
-<!--
 ## Approach
-To achieve reliable control, we designed a complete EMG signal processing and classification pipeline that combines **signal preprocessing**, **feature extraction**, **neural network-based classification**, and **post-processing**. In addition, we implemented a **state machine** to translate the classified signals into corresponding grasp types. The entire system was developed in **MATLAB** and **Simulink**, enabling both algorithm design and real-time testing on the prosthesis hardware.
+To achieve robust prosthesis control, we designed a complete EMG signal processing and classification pipeline that combines **signal preprocessing**, **feature extraction**, **neural network-based classification**, and **post-processing**. In addition, we implemented a **state machine** to translate the classified signals into corresponding grasp types. The entire system was developed in **MATLAB** and **Simulink**.
 
 ### Signal Classification
 
-#### 1. Raw Data Collection
-Surface EMG signals are recorded from **four Ottobock MyoBock electrodes** placed on the user's residual limb. Each channel captures the electrical activity of a different muscle group responsible for hand and wrist motions, transmitting signals from the arm to the hand.
+**1. Raw Data Collection and Preprocessing**
+Surface EMG signals are recorded from **four Ottobock MyoBock electrodes** placed on the user's residual arm. Each channel captures the electrical activity of a different muscle group responsible for hand and wrist motions, transmitting signals from the arm to the hand. The placement of the electrodes is determined individually for each user, as the muscle structure and available activation sites vary from person to person.
 
-#### 2. Preprocessing
-The signals are sampled at high frequency and segmented into overlapping time windows of **800 ms** with a **400 ms overlap**, providing both temporal continuity and responsiveness during real-time operation.
+The signals are sampled at high frequency and segmented into overlapping time windows of **800 ms** with a **400 ms overlap**, ensuring both temporal continuity and responsiveness during real-time operation.
 
-#### 3. Feature Extraction
-Each window is transformed into a compact feature vector describing the temporal and dynamic characteristics of the EMG signal. Extracted features included:
+**2. Feature Extraction**
+Each window is transformed into a compact feature vector describing the temporal and dynamic characteristics of the EMG signal. We selected the features based on established EMG signal analysis literature:
 
 - Temporal moment
 - Slope sign change
@@ -40,52 +38,47 @@ Each window is transformed into a compact feature vector describing the temporal
 - Average amplitude change
 - Enhanced mean absolute value
 
-These features are widely used in EMG signal analysis and effectively capture both time-domain and nonlinear properties of muscle activity.
+To reduce computational load and improve generalization, we applied **Linear Discriminant Analysis (LDA)** to project the feature space into a lower-dimensional representation before classification.
 
-#### 4. Dimensionality Reduction
-To reduce computational load and improve generalization, we apply **Linear Discriminant Analysis (LDA)** to project the feature space to a lower-dimensional representation before classification.
+**3. Classification Models**
+We implemented and compared several classification approaches to evaluate their performance and suitability for our use case:
 
-#### 5. Classification Models
-We implemented and compared several classification approaches to evaluate performance, robustness, and real-time suitability:
+- **k-Nearest Neighbors (kNN):** Simple to implement but computationally expensive during inference.
+- **Logistic Regression (LRC):** Fast and interpretable but limited by its linear decision boundaries.
+- **Feedforward Neural Network (FFNN):** Capable of modeling nonlinear relationships but more sensitive to overfitting.
+- **Convolutional Neural Network (CNN):** Provides robust spatial–temporal feature extraction while maintaining scalability.
 
-- **k-Nearest Neighbors (kNN):** Simple and easy to implement but computationally expensive during inference, making it less suitable for real-time embedded deployment.
+The final model used was a **CNN** with **leaky ReLU** activations. The network was trained using **mini-batch gradient descent** and the **Adam optimizer**, with **batch normalization** to improve convergence and stability.
 
-- **Logistic Regression (LRC):** Fast and interpretable, but its linear decision boundaries limit performance on complex, nonlinear EMG data.
-
-- **Feedforward Neural Network (FFNN):** Provides nonlinear decision-making capability but requires careful tuning to avoid overfitting and must remain lightweight to meet real-time constraints.
-
-- **Convolutional Neural Network (CNN):** Capable of automatically extracting hierarchical spatial–temporal features from EMG signals, improving generalization and robustness against signal variability.
-
-The final model we used is a **CNN** with **leaky ReLU** activations. The network was trained using **mini-batch gradient descent** and the **Adam optimizer**, with **batch normalization** to improve convergence and stability.
-
-#### 6. Post-Processing
+**4. Post-Processing**
 To ensure smooth and stable predictions during real-time control, we implemented a **probability-based refinement** of the classifier output:
 
-- If the first three labels agreed, the pose was assigned.
-- If the second and third labels agreed and their combined probability exceeded 75%, the pose was assigned.
-- If the third label's probability exceeded 90%, the pose was assigned.
-- If the first two labels agreed and their combined probability exceeded 80%, the pose was assigned.
-- In all other cases, the pose defaulted to rest.
+- If the first three labels agree, the pose is assigned.
+- If the second and third labels agree and their combined probability exceeded 75%, the pose is assigned.
+- If the third label's probability exceeds 90%, the pose is assigned.
+- If the first two labels agree and their combined probability exceeds 80%, the pose is assigned.
+- In all other cases, the pose defaults to the resting state.
+
+This refinement step aims to reduce transient misclassifications and improve stability during continuous operation.
 
 ### State Machine
-The challenge here is taht the user cannot do a lot of different msucle activations.
-To convert the classified EMG signals into meaningful and practical control, we implemented a **state machine** that maps the user's muscle activity to specific grasp types. The state machine provides an intuitive interface between the **signal classification pipeline** and the **prosthesis control logic**, ensuring smooth and predictable transitions between actions.
+A key challenge in prosthesis control is that users typically have access to only a few distinct and repeatable muscle activations. The control strategy must therefore extract as much functionality as possible from a limited number of EMG inputs. To address this, we designed a **state machine** that maps muscle activations to specific control actions. It enables multiple grasp types and wrist motions using only three user inputs that mimic the muscle activations for **hand extension**, **hand flexion**, and **rest**.
 
-The system recognizes three main EMG states — **Rest**, **Open**, and **Close** — which serve as the user's primary control inputs. Depending on the current state and the duration or sequence of these inputs, the prosthesis transitions through a hierarchy of grasping modes. This structure enables the user to access multiple grasp types without needing explicit manual selection, making control more fluid and natural.
+The prosthesis supports several essential grasp types commonly used in daily activities, including:
+- **Palmer pinch:** Bringing the thumb and index finger together to pick up small objects.
+- **Lateral pinch:** Positioning the thumb against the side of the index finger to hold flat items.
+- **Power grasp:** Closing all fingers into a fist to carry larger objects, such as a crate of bottles.
+- **Precision sphere grasp:** Using the fingertips to manipulate small round objects, such as screwing in a light bulb.
+- **Wrist rotation:** Allowing pronation and supination for improved positioning and dexterity.
 
-#### Grasp Transitions
-- From **Rest**, the user can trigger **Open** or **Close** depending on muscle activation patterns.  
-- Short or long activations allow movement between **Grasp Open**, **Grasp Rest**, and **Grasp Close** states, controlling the opening and closing of the hand.  
-- When fully open, the system enters the **Fully Open** state, which allows selection of specific grasp types such as **Palmar Pinch**, **Power Grasp**, **Precision Sphere**, or **Lateral Pinch**.  
-- Separate states handle **wrist rotation**, allowing transitions between **Pronation**, **Wrist Rest**, and **Supination** for more complete manipulation tasks.
+The system recognizes three main EMG states: **Rest** (no activation), **Open** (hand extension), and **Close** (hand flexion), which serve as the primary control inputs. Depending on the current state and the duration or sequence of these activations, the prosthesis transitions between different grasping modes. This design allows the user to access multiple grasp types seamlessly without explicit manual selection.
 
-#### Control Logic
-The design prioritizes **consistency and ease of use**:
-- Short activations lead to small, precise movements.  
-- Long activations trigger full hand or wrist transitions.  
-- All transitions are designed to be **non-blocking**, allowing quick return to the resting position at any point.
+The control logic was designed with a focus on **consistency**, **ease of use**, and **adaptability**:
+- Short activations result in small, precise finger or wrist adjustments.
+- Long activations trigger complete transitions between grasp types.
+- All transitions are **non-blocking**, allowing the user to return to the resting position at any time.
 
-By combining this structured control logic with the EMG classifier, the state machine enables **multi-grasp, multi-motion control** using only three intuitive muscle commands. This approach strikes a balance between simplicity for the user and flexibility in functionality, supporting a wide range of everyday tasks such as grasping, lifting, rotating, and releasing objects. -->
+Through this structure, the state machine enables **multi-grasp, multi-motion control** using only three intuitive EMG commands.
 
 ## Findings
 Overall, the system demonstrated robust performance, although the challenges we encountered were quite different from what we had initially expected.
