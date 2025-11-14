@@ -1,10 +1,10 @@
 ---
-title: "Controlling Rigid–Soft Robots in Mixed Reality"
-short: "Details coming late October."
-tags: ["Human-Robot Interaction", "Soft Robotics", "Mixed Reality"]
+title: "Human-Robot Interaction with Hybrid Robots in Mixed Reality"
+short: "Publication under review. Details coming early January."
+tags: ["Human-Robot Interaction", "Hybrid Robotics", "Mixed Reality"]
 hero: "/assets/hybrid_blurred.png"
 thumb: "/assets/hybrid_blurred.png"
 weight: 2025
 ---
 
-Details coming late October.
+Publication under review. Details coming early January.
