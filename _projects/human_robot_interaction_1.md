@@ -1,7 +1,7 @@
 ---
-title: "Controlling Soft Robots Part 1: Geometry-Informed Analytical Modeling"
+title: "Controlling Soft Robots Part 1: Modeling Logarthmic Spiral-Shaped Robots"
 short: "Publication under review. Details coming early January."
-tags: ["Human-Robot Interaction", "Hybrid Robotics", "Mixed Reality"]
+tags: ["Tendon-Driven Robots", "Shape Control", "Data-Driven Splining"]
 hero: "/assets/hybrid_blurred.png"
 thumb: "/assets/hybrid_blurred.png"
 weight: 2026
