@@ -29,27 +29,118 @@ Our goal was to create a **human-in-the-loop control pipeline** that feels natur
 
 ## Approach
 
+## Approach
+
 ### System Overview
 
-The robotic platform consists of:
+The AR-based teleoperation framework is built as a tightly integrated hardware–software stack. The system combines real-time simulation, mixed-reality visualization, rigid-arm control, and soft-robot actuation into a unified human–robot interaction pipeline.
 
-- A **7-DoF rigid robotic arm**
-- A **tendon-driven spiral-shaped soft continuum arm** mounted at the end-effector
-- A gripper at the tip of the soft arm
+At a high level:
 
-The system is deployed using:
+- The user interacts through a **Meta Quest 3 headset and Touch Plus controllers**.
+- Unity integrates mixed-reality rendering, tracking, and physics simulation.
+- MuJoCo simulates the hybrid rigid–soft robot in real time.
+- Control commands are streamed to two separate workstations:
+  - One controlling the rigid arm.
+  - One controlling the soft robot tendon motors.
 
-- **MuJoCo** for physics simulation  
-- **Unity** for rendering and interaction  
-- **Meta Quest 3** for AR visualization and input  
+This structure ensures that visualization, control, and physical execution remain synchronized.
 
-MuJoCo handles all physics computation, while Unity manages AR visualization and user interaction. The result is a fully integrated **simulation-to-reality teleoperation pipeline**.
+### Hardware Stack
 
----
+The physical system consists of the following components:
 
-### AR-Based Teleoperation Concept
+#### User Interface Layer
 
-### Dual Target Specification
+- **Meta Quest 3**
+  - Provides stereoscopic mixed-reality visualization.
+  - Overlays the simulated robot onto the physical robot.
+  - Previews the resulting motion based on selected control actions.
+
+- **Left Touch Plus Controller**
+  - Controls the end-effector position of the rigid robot.
+  - Provides 6-DoF pose tracking for rigid-arm target specification.
+
+- **Right Touch Plus Controller**
+  - Controls the soft robot.
+  - Provides 6-DoF pose tracking for specifying soft-arm target positions.
+
+#### Robot Actuation Layer
+
+- **Franka Emika Panda**
+  - 7-DoF rigid robotic arm.
+  - Provides base motion and positioning for the hybrid system.
+  - Controlled via the MoveIt control framework.
+
+- **Soft Robot Tendon Motors**
+  - Drive tendon actuation for the soft continuum arm.
+  - Controlled through a custom USB-based PID control framework.
+
+#### Control Infrastructure
+
+- **Workstation A**
+  - Receives rigid control values via UDP over Wi-Fi.
+  - Sends actuation commands to the Franka Emika Panda.
+
+- **Workstation B**
+  - Receives soft control values via UDP over Wi-Fi.
+  - Sends actuation commands to the tendon motors of the soft arm.
+
+This distributed setup allows rigid and soft subsystems to be controlled independently while remaining coordinated through the AR interface.
+
+### Software Stack
+
+The software architecture integrates simulation, tracking, rendering, and deployment components.
+
+#### Core Engine
+
+- **Unity Engine**
+  - Central integration platform.
+  - Manages visualization, user interaction, and data exchange.
+  - Connects simulation, tracking plugins, and external control systems.
+
+#### Simulation Layer
+
+- **MuJoCo Plugin**
+  - Simulates the physical behavior of the hybrid rigid–soft robot.
+  - Visualizes kinematic and dynamic responses.
+  - Provides interfaces for actuation control.
+
+#### Mixed-Reality & Tracking Layer
+
+- **Meta XR Plugin**
+  - Manages mixed-reality interactions.
+  - Maps user inputs to robot control actions in physical space.
+
+- **Meta OVR Plugin**
+  - Provides real-time headset and controller tracking data.
+  - Supplies pose information for rendering and interaction.
+
+- **Meta MRUK Plugin**
+  - Handles spatial mapping and passthrough rendering.
+  - Aligns simulated and physical robots in mixed reality.
+
+#### Deployment Pipeline
+
+- **Gradle Build System**
+  - Builds and packages the compiled application for Meta Quest.
+
+- **SideQuest**
+  - Transfers and manages the application on the Meta Quest device.
+
+Together, this stack enables real-time bidirectional interaction:
+
+- User inputs → Unity → MuJoCo simulation → Control commands → Physical robot  
+- Robot state → Simulation update → Mixed-reality overlay → User feedback  
+
+This architecture ensures that the digital twin, user interaction, and physical actuation remain tightly synchronized throughout teleoperation.
+
+
+
+
+### Teleoperation Concept
+
+#### Dual Target Specification
 
 The user operates two AR-tracked controllers equipped with virtual laser pointers:
 
@@ -65,7 +156,7 @@ This creates a clear and natural mapping:
 
 ---
 
-### Simulation Preview Before Execution
+#### Simulation Preview Before Execution
 
 A key feature of the framework is a **virtual preview mechanism**.
 
@@ -87,7 +178,7 @@ Instead of blindly commanding the real robot, the user first evaluates the outco
 
 ---
 
-### Soft Arm Control Strategy
+### Control Strategy
 
 The soft continuum arm is constrained to **planar bending motions**, allowing unique shape mappings under single-degree-of-freedom actuation.
 
@@ -123,12 +214,7 @@ We evaluated the AR teleoperation framework across multiple task categories:
 
 ### System Evaluation
 
-Across these experiments, the hybrid system demonstrated:
-
-- Stable trajectory following.
-- Successful contact formation.
-- Secure grasping without slipping.
-- Smooth coordination between rigid positioning and soft manipulation.
+Across these experiments, the hybrid system demonstrated stable trajectory following, successful contact formation, secure grasping without slipping, and smooth coordination between rigid positioning and soft manipulation.
 
 ### User Evaluation
 
