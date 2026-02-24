@@ -149,21 +149,37 @@ This work highlights several key ideas:
 
 Most importantly, this project shows that even complex, high-DoF hybrid robots can be made accessible to human users through thoughtful interface design and real-time simulation.
 
----
-
 ## Application
 
-## Future Directions
+While this framework enables intuitive teleoperation, I see its most powerful application as a tool for **teaching robots through demonstration**.
 
-Potential extensions of this framework include:
+Rather than programming behaviors explicitly, users can control the hybrid robot naturally in mixed reality and demonstrate how a task should be performed. A sequence of such demonstrations generates high-quality data that can be used for **imitation learning (IL)** or behavior cloning.
 
-- Shared autonomy and intention inference  
-- Haptic feedback integration  
-- Learning from teleoperation data for imitation learning  
-- Quantitative user studies evaluating cognitive workload and intuitiveness  
-- Extension to contact-rich and force-sensitive manipulation  
+Because the user interacts through a physically grounded digital twin, these demonstrations are:
 
-This project represents a step toward **immersive, simulation-grounded human–robot collaboration**, where physical robots can be safely and intuitively controlled in real environments through augmented reality.
+- Safe, thanks to simulation preview.
+- Structured, since targets are specified explicitly in 3D space.
+- Consistent across trials.
+- Directly transferable to real hardware.
+
+In practice, this opens up several concrete possibilities:
+
+- **Task teaching:** Users can demonstrate grasping, pick-and-place, or coordinated manipulation behaviors without writing low-level control code.
+- **Rapid data collection:** Complex hybrid robot motions can be recorded efficiently for supervised policy learning.
+- **Hybrid coordination learning:** Models can learn how to coordinate rigid positioning and soft manipulation jointly.
+- **Dataset generation for physical AI:** The AR interface provides a scalable way to collect multimodal interaction data grounded in real robot dynamics.
+
+Instead of treating teleoperation as the final control strategy, this system turns it into a **data engine for learning-based control**.
+
+
+### Future Directions
+
+Upcoming extensions of this framework include:
+
+- Quantitative user studies evaluating performance, cognitive workload, and intuitiveness.
+- Extending the simulation to consider contact-rich and force-sensitive manipulation with objects and surfaces.
+
+More broadly, this project represents a step toward **immersive, simulation-grounded human–robot collaboration**, where humans do not just operate robots, but teach them.
 
 ## Media
 
