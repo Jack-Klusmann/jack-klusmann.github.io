@@ -78,24 +78,17 @@ The user scans a QR marker attached to the robot base. The system registers the 
 
 #### 2. Dual-Hand Interaction
 
-The **left controller** operates the rigid arm and the **right controller** controls the soft arm. Both emit retractable rays that allow users to specify **end-effector poses directly in 3D**.
-
-The index trigger adjusts position, the middle trigger adjusts orientation, and the thumbstick controls ray length. The interaction scheme is consistent across subsystems while respecting their different physical behaviors.
+The **left controller** operates the rigid arm and the **right controller** controls the soft arm. Both emit retractable rays that allow users to specify **end-effector poses directly in 3D**. The index trigger adjusts position, the middle trigger adjusts orientation, and the thumbstick controls ray length. The interaction scheme is consistent across subsystems while respecting their different physical behaviors.
 
 #### 3. Simulation-First Control
 
-All actions are executed in **simulation first**.
-When a target is specified, inverse kinematics are computed and the virtual robot updates in real time. The user confirms the predicted motion before it is streamed to hardware.
-
-This creates a tight loop: **specify → preview → refine → execute**.
+All actions are executed in **simulation first**. When a target is specified, inverse kinematics are computed and the virtual robot updates in real time. The user confirms the predicted motion before it is streamed to hardware. This creates a tight loop: **specify → preview → refine → execute**.
 
 #### 4. Coordinated Hybrid Behavior
 
-The rigid arm handles **global positioning**, while the soft arm enables **compliant local manipulation**.
+The rigid arm handles **global positioning**, while the soft arm enables **compliant local manipulation**. Because the soft arm is constrained to **planar bending**, targets outside its bending plane automatically trigger reorientation of the rigid end-effector. The system aligns the bending plane with the user-defined direction, allowing physically consistent curling. A lightweight neural network performs **real-time inverse kinematics**, mapping gravity direction and end-effector pose to tendon lengths.
 
-Because the soft arm is constrained to **planar bending**, targets outside its bending plane automatically trigger reorientation of the rigid end-effector. The system aligns the bending plane with the user-defined direction, allowing physically consistent curling.
-
-A lightweight neural network performs **real-time inverse kinematics**, mapping gravity direction and end-effector pose to tendon lengths. From the user’s perspective, the system behaves as a **single embodied robot**, even though rigid and soft subsystems are simulated and actuated separately.
+From the user’s perspective, the system behaves as a **single embodied robot**, even though rigid and soft subsystems are simulated and actuated separately.
 
 ## Findings
 
