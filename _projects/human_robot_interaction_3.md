@@ -79,46 +79,39 @@ This architecture keeps the digital twin, user interaction, and physical actuati
 
 ### Teleoperation Workflow
 
-Using the system follows a simple, intuitive flow, even though a fairly complex stack is running underneath.
+Despite the complexity of the underlying stack, using the system follows a simple and intuitive flow.
 
 #### 1. Registration and Alignment
 
-After launching the application, the user looks at a QR marker attached to the robot base. The system registers the simulated model relative to the physical robot and overlays the virtual robot directly onto the real one.
+After launching the application, the user looks at a QR marker attached to the robot base. The system registers the simulated model to the physical robot and overlays the virtual robot directly onto it.
 
-Once alignment is confirmed, the virtual robot remains spatially anchored in place. From this point onward, the user interacts with a unified hybrid embodiment: the simulated robot preview and the physical robot share the same space.
+Once aligned, the digital twin remains spatially anchored. From this point onward, the user interacts with a unified hybrid embodiment in which simulation and hardware share the same space.
 
 #### 2. Dual-Hand Interaction
 
-Each controller is mapped to one subsystem: the **left controller** operates the rigid arm, while the **right controller** controls the soft arm. Both controllers project retractable virtual rays into the workspace. By dragging the ray endpoints through space, the user directly specifies desired end-effector poses in 3D.
+Each controller maps to one subsystem: the **left controller** operates the rigid arm and the **right controller** controls the soft arm. Both emit retractable virtual rays that allow the user to specify end-effector poses directly in 3D.
 
-The **index trigger** adjusts position, and the **middle trigger** adjusts orientation. The thumbstick controls the ray length, allowing the user to work comfortably across different depths in space.
-
-This creates a unified interaction scheme across both subsystems while still respecting their fundamentally different physical behaviors.
+The index trigger adjusts position, the middle trigger adjusts orientation, and the thumbstick controls ray length. The interaction scheme is consistent across subsystems while respecting their different physical behaviors.
 
 #### 3. Simulation-First Control
 
-Every action is first applied to the simulated robot.
+All actions are executed in simulation first.
 
-When the user moves a ray, the corresponding inverse kinematics is computed, the simulated robot updates in real time, and the headset displays a live preview of the resulting motion. If the motion looks correct, the user confirms the action. If not, the simulated robot can be reset immediately without affecting the hardware. Only after confirmation are commands streamed to the physical robot.
+When a target is specified, inverse kinematics are computed and the virtual robot updates in real time. The user observes the predicted motion in AR and confirms it only if it matches their intent. Otherwise, the system can be reset instantly without affecting the hardware. Confirmed motions are then streamed to the physical robot.
 
-This creates a tight human-in-the-loop preview cycle:
-
-1. Specify the motion.
-2. Observe the simulated outcome.
-3. Adjust if necessary.
-4. Execute on hardware.
+This creates a tight preview loop: specify, observe, refine, execute.
 
 #### 4. Coordinated Hybrid Behavior
 
-The rigid arm handles global positioning, while the soft arm performs compliant, local manipulation. In practice, the rigid arm brings the hybrid system toward an object, and the soft arm curls or uncurls in a controlled sequence to interact with it. Both subsystems can be reset independently at any time.
+The rigid arm performs global positioning, while the soft arm enables compliant local manipulation. In practice, the rigid subsystem brings the robot into place and the soft arm executes controlled curling to grasp or interact.
 
-However, this coordination is not purely manual. The soft continuum arm is constrained to **planar bending motions**, resulting in a unique shape for a given single-degree-of-freedom actuation input. When the user specifies a soft-arm target that lies outside its current bending plane, the system automatically reorients the rigid end-effector so that the bending plane aligns with the user-defined direction.
+The coordination is partially automatic. Because the soft arm is constrained to **planar bending**, specifying a target outside its bending plane triggers automatic reorientation of the rigid end-effector. The system aligns the bending plane with the user-defined direction so the soft arm can execute a physically consistent curl.
 
-This adjustment happens transparently. The user does not need to reason about curvature constraints, tendon geometry, or internal actuation limits. From their perspective, they simply indicate a spatial target, and the hybrid system resolves the rigid–soft coordination automatically.
+This adjustment happens transparently. The user does not need to reason about tendon geometry or curvature constraints; they simply indicate a spatial target and the system resolves the rigid–soft coordination internally.
 
-Under the hood, the soft arm inverse kinematics is handled by a lightweight neural network that maps gravity direction, end-effector position, and end-effector orientation to tendon lengths in real time. This enables low-latency control across the reachable workspace while maintaining physically consistent behavior.
+A lightweight neural network computes soft-arm inverse kinematics in real time by mapping gravity direction and end-effector pose to tendon lengths. This enables low-latency control across the reachable workspace while preserving physically grounded behavior.
 
-From the user’s perspective, it feels like controlling a single embodied system, even though the rigid and soft subsystems are computed, simulated, and actuated separately.
+From the user’s perspective, it feels like controlling a single embodied system, even though rigid and soft subsystems are simulated and actuated separately.
 
 ## Findings
 
@@ -183,6 +176,25 @@ Upcoming extensions of this framework include:
 More broadly, this project represents a step toward **immersive, simulation-grounded human–robot collaboration**, where humans do not just operate robots, but teach them.
 
 ## Media
+
+<div class="grid media-grid">
+
+  <figure>
+    <img src="/assets/hri/vr.png" alt="1st Person View (VR)">
+    <figcaption>The 1st person view in the VR mode, used for initial testing.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/hri/ar.png" alt="1st Person View (AR)">
+    <figcaption>The 1st person view in AR mode, used for user experiments.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/hri/human.png" alt="3rd Person View">
+    <figcaption>Me interacting with the robot :)</figcaption>
+  </figure>
+
+</div>
 
 <div style="position:relative; width:100%; margin:0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
   <iframe
