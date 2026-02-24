@@ -47,7 +47,7 @@ MuJoCo handles all physics computation, while Unity manages AR visualization and
 
 ---
 
-## AR-Based Teleoperation Concept
+### AR-Based Teleoperation Concept
 
 ### Dual Target Specification
 
@@ -87,7 +87,7 @@ Instead of blindly commanding the real robot, the user first evaluates the outco
 
 ---
 
-## Soft Arm Control Strategy
+### Soft Arm Control Strategy
 
 The soft continuum arm is constrained to **planar bending motions**, allowing unique shape mappings under single-degree-of-freedom actuation.
 
@@ -116,40 +116,34 @@ This allows low-latency control across the full reachable workspace.
 
 We evaluated the AR teleoperation framework across multiple task categories:
 
-### Free Motion
-The user moves the virtual robot freely in 3D space, while the physical robot follows with a controlled delay.
+- **Object Following:** The user moves the virtual robot freely in 3D space, while the physical robot follows with a controlled delay.
+- **Object Reaching:** The user teleoperates the system to reach a hanging target by coordinating rigid positioning with soft-arm curling.
+- **Object Grasping:** The system successfully grasps objects placed on flat surfaces, suspended in mid-air, or handed over dynamically.
+- **Object Handling:** The robot grasps an object from one surface, transfers it through mid-air, and releases it at a different location.
 
-### Reaching
-The user teleoperates the system to reach a hanging target by coordinating rigid positioning and soft curling.
-
-### Grasping
-The system successfully grasps:
-- Objects placed on flat surfaces  
-- Objects suspended in mid-air  
-- Objects handed over dynamically  
-
-### Object Handling
-The robot grasps an object from one surface, transfers it through mid-air, and releases it at a different location.
+### System Evaluation
 
 Across these experiments, the hybrid system demonstrated:
 
-- Stable trajectory following  
-- Successful contact formation  
-- Secure grasping without slipping  
-- Smooth rigid–soft coordination  
+- Stable trajectory following.
+- Successful contact formation.
+- Secure grasping without slipping.
+- Smooth coordination between rigid positioning and soft manipulation.
 
----
+### User Evaluation
 
-### What This Project Demonstrates
+Initial user trials indicated that the AR interface significantly lowered the barrier to controlling the hybrid system. The dual-target specification and simulation preview made task execution more predictable and reduced hesitation during interaction. Users reported that coordinating the rigid and soft subsystems felt more intuitive than expected once the visual feedback loop was established.
+
+### Insights
 
 This work highlights several key ideas:
 
 - **Hybrid embodiment requires hybrid control.**
-- Intuitive teleoperation of soft robots is possible when grounded in physically consistent simulation.
-- AR can serve as a powerful interface for human–robot interaction beyond simple visualization.
-- Digital twin preview significantly enhances safety and usability in physical interaction tasks.
+- Intuitive teleoperation of soft robots becomes feasible when grounded in physically consistent simulation.
+- AR can serve as a powerful interaction layer, not just a visualization tool.
+- Digital twin preview meaningfully enhances safety, confidence, and usability during physical interaction.
 
-Most importantly, this project shows that even complex, high-DoF hybrid robots can be made accessible to human users through thoughtful interface design and real-time simulation.
+Most importantly, this project demonstrates that even complex, high-DoF hybrid robots can be made accessible to human users through thoughtful interface design and real-time simulation-based feedback.
 
 ## Application
 
@@ -185,7 +179,7 @@ More broadly, this project represents a step toward **immersive, simulation-grou
 
 ## Media
 
-<div style="position:relative; width:80%; margin:0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
+<div style="position:relative; width:100%; margin:0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
   <iframe
     src="https://www.youtube.com/embed/xgFLkJ0uQh0"
     title="Physical Human-Robot Interaction for Grasping in Augmented Reality via Rigid-Soft Robot Synergy"
