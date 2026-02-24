@@ -180,23 +180,23 @@ More broadly, this project represents a step toward **immersive, simulation-grou
 <div class="grid media-grid">
 
   <figure>
-    <img src="/assets/hri/vr.png" alt="1st Person View (VR)">
+    <img src="/assets/hri/vr.jpg" alt="1st Person View (VR)">
     <figcaption>The 1st person view in the VR mode, used for initial testing.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/hri/ar.png" alt="1st Person View (AR)">
+    <img src="/assets/hri/ar.jpeg" alt="1st Person View (AR)">
     <figcaption>The 1st person view in AR mode, used for user experiments.</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/hri/human.png" alt="3rd Person View">
+    <img src="/assets/hri/human.jpg" alt="3rd Person View">
     <figcaption>Me interacting with the robot :)</figcaption>
   </figure>
 
 </div>
 
-<div style="position:relative; width:100%; margin:0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
+<div style="position:relative; width:100%; margin:40px auto 0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
   <iframe
     src="https://www.youtube.com/embed/xgFLkJ0uQh0"
     title="Physical Human-Robot Interaction for Grasping in Augmented Reality via Rigid-Soft Robot Synergy"
@@ -205,7 +205,6 @@ More broadly, this project represents a step toward **immersive, simulation-grou
     allowfullscreen>
   </iframe>
 </div>
-
 
 ## Links
 [IEEE RoboSoft 2026 Paper](https://arxiv.org/abs/2602.17128)
