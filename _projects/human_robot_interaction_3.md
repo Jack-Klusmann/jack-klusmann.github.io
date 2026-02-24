@@ -31,18 +31,11 @@ Our goal was to create a **human-in-the-loop control pipeline** that feels natur
 
 ### System Overview
 
-The AR-based teleoperation framework is built as a tightly integrated hardware–software stack. The system combines real-time simulation, mixed-reality visualization, and coordinated rigid-soft robot control into a unified human–robot interaction pipeline.
+The AR-based teleoperation framework is built as an integrated hardware–software pipeline that unifies real-time simulation, mixed-reality visualization, and hybrid rigid–soft robot control.
 
-At a high level:
+The user interacts through a **Meta Quest 3 headset and Touch Plus controllers**, while **Unity** serves as the central integration layer for rendering, tracking, and communication. A **MuJoCo** model simulates the hybrid robot in real time, and validated control commands are streamed to separate workstations driving the rigid arm and the soft tendon motors.
 
-- The user interacts through a **Meta Quest 3 headset and Touch Plus controllers**.
-- Unity integrates mixed-reality rendering, tracking, and physics simulation.
-- MuJoCo simulates the hybrid rigid–soft robot in real time.
-- Control commands are streamed to two separate workstations:
-  - One controlling the rigid arm.
-  - One controlling the soft robot tendon motors.
-
-A demonstration of the system in action is available in the Media section of this page.
+A demonstration of the system in action is available in the Media section below.
 
 ### Hardware Stack
 
@@ -83,23 +76,15 @@ Despite the complexity of the underlying stack, using the system follows a simpl
 
 #### 1. Registration and Alignment
 
-After launching the application, the user looks at a QR marker attached to the robot base. The system registers the simulated model to the physical robot and overlays the virtual robot directly onto it.
-
-Once aligned, the digital twin remains spatially anchored. From this point onward, the user interacts with a unified hybrid embodiment in which simulation and hardware share the same space.
+After launching the application, the user looks at a QR marker attached to the robot base. The system registers the simulated model to the physical robot and overlays the virtual robot directly onto it. Once aligned, the digital twin remains spatially anchored. From this point onward, the user interacts with a unified hybrid embodiment in which simulation and hardware share the same space.
 
 #### 2. Dual-Hand Interaction
 
-Each controller maps to one subsystem: the **left controller** operates the rigid arm and the **right controller** controls the soft arm. Both emit retractable virtual rays that allow the user to specify end-effector poses directly in 3D.
-
-The index trigger adjusts position, the middle trigger adjusts orientation, and the thumbstick controls ray length. The interaction scheme is consistent across subsystems while respecting their different physical behaviors.
+Each controller maps to one subsystem: the **left controller** operates the rigid arm and the **right controller** controls the soft arm. Both emit retractable virtual rays that allow the user to specify end-effector poses directly in 3D. The index trigger adjusts position, the middle trigger adjusts orientation, and the thumbstick controls ray length. The interaction scheme is consistent across subsystems while respecting their different physical behaviors.
 
 #### 3. Simulation-First Control
 
-All actions are executed in simulation first.
-
-When a target is specified, inverse kinematics are computed and the virtual robot updates in real time. The user observes the predicted motion in AR and confirms it only if it matches their intent. Otherwise, the system can be reset instantly without affecting the hardware. Confirmed motions are then streamed to the physical robot.
-
-This creates a tight preview loop: specify, observe, refine, execute.
+All actions are executed in simulation first. When a target is specified, inverse kinematics are computed and the virtual robot updates in real time. The user observes the predicted motion in AR and confirms it only if it matches their intent. Otherwise, the system can be reset instantly without affecting the hardware. Confirmed motions are then streamed to the physical robot. This creates a tight preview loop: specify, observe, refine, execute.
 
 #### 4. Coordinated Hybrid Behavior
 
@@ -180,7 +165,7 @@ More broadly, this project represents a step toward **immersive, simulation-grou
 <div class="grid media-grid">
 
   <figure>
-    <img src="/assets/hri/vr.jpg" alt="1st Person View (VR)">
+    <img src="/assets/hri/vr.jpeg" alt="1st Person View (VR)">
     <figcaption>The 1st person view in the VR mode, used for initial testing.</figcaption>
   </figure>
 
@@ -190,7 +175,7 @@ More broadly, this project represents a step toward **immersive, simulation-grou
   </figure>
 
   <figure>
-    <img src="/assets/hri/human.jpg" alt="3rd Person View">
+    <img src="/assets/hri/human.jpeg" alt="3rd Person View">
     <figcaption>Me interacting with the robot :)</figcaption>
   </figure>
 
