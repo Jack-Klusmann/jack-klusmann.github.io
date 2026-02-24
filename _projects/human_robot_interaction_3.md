@@ -9,7 +9,7 @@ weight: 2026
 
 ## Motivation
 
-Hybrid rigid–soft robots combine the **precision of rigid manipulators** with the **compliance and adaptability of soft continuum arms**. This combination is especially promising for grasping in unstructured environments: the rigid arm provides accurate positioning, while the soft structure enables safe, conforming contact with objects. However, teleoperating such hybrid systems is fundamentally challenging.
+Hybrid rigid–soft robots combine the **precision of rigid manipulators** with the **compliance and adaptability of soft continuum arms**. This combination is especially promising for grasping in unstructured environments: the rigid arm provides accurate positioning, while the soft structure enables safe, conforming contact with nearby objects. However, teleoperating such hybrid systems is fundamentally challenging.
 
 With a rigid robot, the relationship between command and motion is predictable. If you move the end-effector to a target pose, you can reasonably anticipate what the robot will do. The kinematics are well understood, and the behavior is largely configuration-independent.
 
@@ -17,9 +17,9 @@ Soft robots behave very differently. Their motion depends not only on actuation,
 
 These difficulties become even more pronounced when rigid and soft subsystems are combined. It is no longer just a question of how to control a soft robot, but how to coordinate precision and compliance within a single embodied system.
 
-Traditional teleoperation interfaces designed for rigid robots, such as joysticks, teach pendants, or graphical user interfaces, do not translate well to this setting. Hybrid rigid–soft teleoperation remains relatively unexplored, and mapping intuitive human intent to coordinated rigid–soft motion in such systems is still an open problem.
+Traditional teleoperation interfaces designed for rigid robots, such as joysticks, teach pendants, or graphical user interfaces, do not translate well to this setting. However, hybrid rigid–soft teleoperation remains relatively unexplored, and mapping intuitive human intent to coordinated rigid–soft motion in such systems is still an open problem.
 
-In this project, we developed an augmented reality (AR)-based teleoperation framework that allows users to:
+To solve this problem, we developed an augmented reality (AR)-based teleoperation framework that allows users to:
 
 - Control the rigid and soft subsystems jointly within a unified hybrid robot. 
 - Interact directly with a simulated version of the robot before executing motions on hardware.
@@ -29,11 +29,9 @@ Our goal was to create a **human-in-the-loop control pipeline** that feels natur
 
 ## Approach
 
-## Approach
-
 ### System Overview
 
-The AR-based teleoperation framework is built as a tightly integrated hardware–software stack. The system combines real-time simulation, mixed-reality visualization, rigid-arm control, and soft-robot actuation into a unified human–robot interaction pipeline.
+The AR-based teleoperation framework is built as a tightly integrated hardware–software stack. The system combines real-time simulation, mixed-reality visualization, and coordinated rigid-soft robot control into a unified human–robot interaction pipeline.
 
 At a high level:
 
@@ -44,7 +42,7 @@ At a high level:
   - One controlling the rigid arm.
   - One controlling the soft robot tendon motors.
 
-This structure ensures that visualization, control, and physical execution remain synchronized.
+A demonstration of the system in action is available in the Media section of this page.
 
 ### Hardware Stack
 
@@ -59,10 +57,10 @@ The physical system consists of the following components:
 
 - **Left Touch Plus Controller**
   - Controls the end-effector position of the rigid robot.
-  - Provides 6-DoF pose tracking for rigid-arm target specification.
+  - Provides 6-DoF pose tracking for specifying rigid-arm target positions.
 
 - **Right Touch Plus Controller**
-  - Controls the soft robot.
+  - Controls the end-effector position of the soft robot.
   - Provides 6-DoF pose tracking for specifying soft-arm target positions.
 
 #### Robot Actuation Layer
@@ -90,7 +88,7 @@ This distributed setup allows rigid and soft subsystems to be controlled indepen
 
 ### Software Stack
 
-The software architecture integrates simulation, tracking, rendering, and deployment components.
+The software architecture integrates simulation, tracking, and rendering.
 
 #### Core Engine
 
@@ -120,24 +118,16 @@ The software architecture integrates simulation, tracking, rendering, and deploy
   - Handles spatial mapping and passthrough rendering.
   - Aligns simulated and physical robots in mixed reality.
 
-#### Deployment Pipeline
-
-- **Gradle Build System**
-  - Builds and packages the compiled application for Meta Quest.
-
-- **SideQuest**
-  - Transfers and manages the application on the Meta Quest device.
-
 Together, this stack enables real-time bidirectional interaction:
 
-- User inputs → Unity → MuJoCo simulation → Control commands → Physical robot  
-- Robot state → Simulation update → Mixed-reality overlay → User feedback  
+- User inputs → Unity → MuJoCo simulation → Control commands → Physical robot.
+- Robot state → Simulation update → Mixed-reality overlay → User feedback.
 
 This architecture ensures that the digital twin, user interaction, and physical actuation remain tightly synchronized throughout teleoperation.
 
 ### Teleoperation Workflow
 
-Using the system follows a simple, intuitive flow — even though a fairly complex stack is running underneath.
+Using the system follows a simple, intuitive flow, even though a fairly complex stack is running underneath.
 
 #### 1. Registration and Alignment
 
@@ -147,73 +137,36 @@ Once alignment is confirmed, the virtual robot remains spatially anchored in pla
 
 #### 2. Dual-Hand Interaction
 
-Each controller maps to one subsystem:
+Each controller is mapped to one subsystem: the **left controller** operates the rigid arm, while the **right controller** controls the soft arm. Both controllers project retractable virtual rays into the workspace. By dragging the ray endpoints through space, the user directly specifies desired end-effector poses in 3D.
 
-- **Left controller → rigid arm**
-- **Right controller → soft arm**
+The **index trigger** adjusts position, and the **middle trigger** adjusts orientation. The thumbstick controls the ray length, allowing the user to work comfortably across different depths in space.
 
-Both controllers emit retractable virtual rays. By dragging the ray endpoints in space, the user specifies desired end-effector positions directly in 3D.
-
-- The **index trigger** adjusts position.
-- The **middle trigger** adjusts orientation.
-- The thumbstick modifies ray length.
-- A single button press resets the subsystem to a default pose.
-
-This makes the control scheme consistent across rigid and soft subsystems while preserving their different physical behaviors.
+This creates a unified interaction scheme across both subsystems while still respecting their fundamentally different physical behaviors.
 
 #### 3. Simulation-First Control
 
 Every action is first applied to the simulated robot.
 
-When the user moves a ray:
-
-- The corresponding inverse kinematics is computed.
-- The simulated robot updates in real time.
-- The headset displays a live preview of the resulting motion.
-
-If the motion looks correct, the user confirms the action.  
-If not, the simulated robot can be reset immediately without affecting the hardware.
-
-Only after confirmation are commands streamed to the physical robot.
+When the user moves a ray, the corresponding inverse kinematics is computed, the simulated robot updates in real time, and the headset displays a live preview of the resulting motion. If the motion looks correct, the user confirms the action. If not, the simulated robot can be reset immediately without affecting the hardware. Only after confirmation are commands streamed to the physical robot.
 
 This creates a tight human-in-the-loop preview cycle:
 
-1. Specify motion.  
-2. Observe simulated outcome.  
-3. Adjust if needed.  
-4. Execute on hardware.  
+1. Specify the motion.
+2. Observe the simulated outcome.
+3. Adjust if necessary.
+4. Execute on hardware.
 
 #### 4. Coordinated Hybrid Behavior
 
-The rigid arm handles global positioning.  
-The soft arm handles compliant, local manipulation.
+The rigid arm handles global positioning, while the soft arm performs compliant, local manipulation. In practice, the rigid arm brings the hybrid system toward an object, and the soft arm curls or uncurls in a controlled sequence to interact with it. Both subsystems can be reset independently at any time.
 
-For example:
+However, this coordination is not purely manual. The soft continuum arm is constrained to **planar bending motions**, resulting in a unique shape for a given single-degree-of-freedom actuation input. When the user specifies a soft-arm target that lies outside its current bending plane, the system automatically reorients the rigid end-effector so that the bending plane aligns with the user-defined direction.
 
-- The rigid arm moves the hybrid system toward an object.
-- The soft arm curls or uncurls in a controlled sequence.
-- Both subsystems can be reset independently.
+This adjustment happens transparently. The user does not need to reason about curvature constraints, tendon geometry, or internal actuation limits. From their perspective, they simply indicate a spatial target, and the hybrid system resolves the rigid–soft coordination automatically.
 
-However, this coordination is not purely manual.
+Under the hood, the soft arm inverse kinematics is handled by a lightweight neural network that maps gravity direction, end-effector position, and end-effector orientation to tendon lengths in real time. This enables low-latency control across the reachable workspace while maintaining physically consistent behavior.
 
-The soft continuum arm is constrained to **planar bending motions**, resulting in a unique shape for a given single-degree-of-freedom actuation input. When the user specifies a soft-arm target that lies outside its current bending plane, the system automatically reorients the rigid end-effector so that:
-
-- The bending plane aligns with the user-defined direction.  
-- The soft arm can execute a physically consistent curl toward the target.
-
-This alignment happens transparently. The user does not need to reason about curvature constraints, tendon geometry, or internal actuation limits. From their perspective, they simply indicate a spatial target, and the hybrid system resolves the rigid–soft coordination automatically.
-
-Under the hood, the soft arm inverse kinematics is handled by a lightweight neural network that maps:
-
-- Gravity direction  
-- End-effector position  
-- End-effector orientation  
-
-to tendon lengths in real time.
-
-This enables low-latency control across the reachable workspace while maintaining physically consistent behavior.
-
-From the user’s perspective, it feels like controlling a single embodied system — even though rigid and soft subsystems are computed, simulated, and actuated separately.
+From the user’s perspective, it feels like controlling a single embodied system, even though the rigid and soft subsystems are computed, simulated, and actuated separately.
 
 ## Findings
 
