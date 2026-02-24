@@ -185,7 +185,7 @@ More broadly, this project represents a step toward **immersive, simulation-grou
 
 ## Media
 
-<div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
+<div style="position:relative; width:80%; margin:0 auto; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; border:1px solid #eee; background:#000;">
   <iframe
     src="https://www.youtube.com/embed/xgFLkJ0uQh0"
     title="Physical Human-Robot Interaction for Grasping in Augmented Reality via Rigid-Soft Robot Synergy"
