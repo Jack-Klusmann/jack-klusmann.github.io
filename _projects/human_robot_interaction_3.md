@@ -7,15 +7,6 @@ thumb: "/assets/interact.jpg"
 weight: 2026
 ---
 
----
-title: "Teleoperating Hybrid Robots in Augmented Reality"
-short: "AR-based teleoperation framework for hybrid rigid–soft robotic manipulation."
-tags: ["Augmented Reality", "Teleoperation", "Soft Robotics", "Human–Robot Interaction"]
-hero: "/assets/ar_teleoperation.jpg"
-thumb: "/assets/ar_teleoperation.jpg"
-weight: 2026
----
-
 ## Motivation
 
 Hybrid rigid–soft robots combine the **precision of rigid manipulators** with the **compliance and adaptability of soft continuum arms**. This combination is especially promising for grasping in unstructured environments: the rigid arm provides accurate positioning, while the soft structure enables safe, conforming contact with objects. However, teleoperating such hybrid systems is fundamentally challenging.
@@ -176,7 +167,7 @@ This project represents a step toward **immersive, simulation-grounded human–r
 
 <div class="video-container">
   <iframe 
-    src="https://www.youtube.com/watch?v=xgFLkJ0uQh0" 
+    src="https://www.youtube.com/embed/xgFLkJ0uQh0" 
     title="Physical Human-Robot Interaction for Grasping in Augmented Reality via Rigid-Soft Robot Synergy"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
