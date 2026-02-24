@@ -110,7 +110,9 @@ This allows low-latency control across the full reachable workspace.
 
 ---
 
-## Experiments
+## Findings
+
+### Experiments
 
 We evaluated the AR teleoperation framework across multiple task categories:
 
@@ -138,7 +140,7 @@ Across these experiments, the hybrid system demonstrated:
 
 ---
 
-## What This Project Demonstrates
+### What This Project Demonstrates
 
 This work highlights several key ideas:
 
@@ -187,7 +189,6 @@ More broadly, this project represents a step toward **immersive, simulation-grou
   <iframe 
     src="https://www.youtube.com/embed/xgFLkJ0uQh0" 
     title="Physical Human-Robot Interaction for Grasping in Augmented Reality via Rigid-Soft Robot Synergy"
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
