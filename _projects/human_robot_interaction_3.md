@@ -46,84 +46,36 @@ A demonstration of the system in action is available in the Media section of thi
 
 ### Hardware Stack
 
-The physical system consists of the following components:
+The system consists of three main layers: user interface, robot actuation, and distributed control.
 
-#### User Interface Layer
+**User Interface**  
+A Meta Quest 3 headset provides mixed-reality visualization and overlays the simulated robot onto the physical system. Two Touch Plus controllers map directly to the rigid and soft subsystems, enabling 6-DoF target specification for each.
 
-- **Meta Quest 3**
-  - Provides stereoscopic mixed-reality visualization.
-  - Overlays the simulated robot onto the physical robot.
-  - Previews the resulting motion based on selected control actions.
+**Robot Actuation**  
+A 7-DoF Franka Emika Panda provides global positioning, while a tendon-driven soft continuum arm enables compliant manipulation. The rigid arm is controlled via MoveIt, and the soft arm through a custom PID-based motor control framework.
 
-- **Left Touch Plus Controller**
-  - Controls the end-effector position of the rigid robot.
-  - Provides 6-DoF pose tracking for specifying rigid-arm target positions.
-
-- **Right Touch Plus Controller**
-  - Controls the end-effector position of the soft robot.
-  - Provides 6-DoF pose tracking for specifying soft-arm target positions.
-
-#### Robot Actuation Layer
-
-- **Franka Emika Panda**
-  - 7-DoF rigid robotic arm.
-  - Provides base motion and positioning for the hybrid system.
-  - Controlled via the MoveIt control framework.
-
-- **Soft Robot Tendon Motors**
-  - Drive tendon actuation for the soft continuum arm.
-  - Controlled through a custom USB-based PID control framework.
-
-#### Control Infrastructure
-
-- **Workstation A**
-  - Receives rigid control values via UDP over Wi-Fi.
-  - Sends actuation commands to the Franka Emika Panda.
-
-- **Workstation B**
-  - Receives soft control values via UDP over Wi-Fi.
-  - Sends actuation commands to the tendon motors of the soft arm.
-
-This distributed setup allows rigid and soft subsystems to be controlled independently while remaining coordinated through the AR interface.
+**Control Infrastructure**  
+Control commands are streamed via UDP to two separate workstations: one driving the rigid arm and one driving the soft arm. This distributed setup allows both subsystems to operate independently while remaining synchronized through the AR interface.
 
 ### Software Stack
 
-The software architecture integrates simulation, tracking, and rendering.
+The software architecture integrates simulation, tracking, and mixed-reality rendering into a unified control loop.
 
-#### Core Engine
+**Core Integration**  
+Unity serves as the central orchestration layer, handling visualization, user interaction, networking, and communication with external control systems.
 
-- **Unity Engine**
-  - Central integration platform.
-  - Manages visualization, user interaction, and data exchange.
-  - Connects simulation, tracking plugins, and external control systems.
+**Physics Simulation**  
+A MuJoCo plugin runs the hybrid rigid–soft robot model in real time, providing physically grounded simulation and actuation interfaces.
 
-#### Simulation Layer
-
-- **MuJoCo Plugin**
-  - Simulates the physical behavior of the hybrid rigid–soft robot.
-  - Visualizes kinematic and dynamic responses.
-  - Provides interfaces for actuation control.
-
-#### Mixed-Reality & Tracking Layer
-
-- **Meta XR Plugin**
-  - Manages mixed-reality interactions.
-  - Maps user inputs to robot control actions in physical space.
-
-- **Meta OVR Plugin**
-  - Provides real-time headset and controller tracking data.
-  - Supplies pose information for rendering and interaction.
-
-- **Meta MRUK Plugin**
-  - Handles spatial mapping and passthrough rendering.
-  - Aligns simulated and physical robots in mixed reality.
+**Mixed Reality & Tracking**  
+Meta XR, OVR, and MRUK plugins provide headset and controller tracking, spatial mapping, and passthrough alignment, ensuring that the simulated robot remains registered to the physical system.
 
 Together, this stack enables real-time bidirectional interaction:
 
-- User inputs → Unity → MuJoCo simulation → Control commands → Physical robot.
-- Robot state → Simulation update → Mixed-reality overlay → User feedback.
+User input → Unity → MuJoCo simulation → Control commands → Physical robot  
+Robot state → Simulation update → AR overlay → User feedback  
 
-This architecture ensures that the digital twin, user interaction, and physical actuation remain tightly synchronized throughout teleoperation.
+This architecture keeps the digital twin, user interaction, and physical actuation tightly synchronized throughout teleoperation.
 
 ### Teleoperation Workflow
 
