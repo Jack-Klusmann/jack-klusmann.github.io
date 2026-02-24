@@ -29,9 +29,7 @@ The goal was to create a **human-in-the-loop control pipeline** that feels natur
 
 ### System Overview
 
-The AR-based teleoperation framework is built as an integrated hardware–software pipeline that unifies real-time simulation, mixed-reality visualization, and hybrid rigid–soft robot control.
-
-The user interacts through a **Meta Quest 3 headset and Touch Plus controllers**, while **Unity** serves as the central integration layer for rendering, tracking, and communication. A **MuJoCo** model simulates the hybrid robot in real time, and validated control commands are streamed to separate workstations driving the rigid arm and the soft tendon motors.
+The AR-based teleoperation framework is built as an integrated hardware–software pipeline that unifies real-time simulation, mixed-reality visualization, and hybrid rigid–soft robot control. The user interacts through a **Meta Quest 3 headset and Touch Plus controllers**, while **Unity** serves as the central integration layer for rendering, tracking, and communication. A **MuJoCo** model simulates the hybrid robot in real time, and validated control commands are streamed to separate workstations driving the rigid arm and the soft tendon motors.
 
 A demonstration of the system in action is available in the Media section below.
 
