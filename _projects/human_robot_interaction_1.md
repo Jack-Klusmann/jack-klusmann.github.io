@@ -7,4 +7,4 @@ thumb: "/assets/model.png"
 weight: 2026
 ---
 
-TODO
+I'll be sharing details in April :)
