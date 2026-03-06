@@ -118,9 +118,13 @@ Once the modeling and identification pipeline is in place, it becomes possible t
 
 ### Future Directions
 
-Ultimately, this work helps bridge one of the most persistent challenges in robotics: the **sim-to-real gap**.
+By grounding simulation models in real experimental data, we can build digital twins that are not only visually similar to physical robots, but also **behaviorally consistent**. This creates a strong foundation for applications such as learning-based control, simulation-driven experimentation, and human-in-the-loop robot interaction.
 
-By grounding simulation models in real experimental data, we can build digital twins that are not only visually similar to physical robots, but also **behaviorally consistent**. This creates a foundation for more advanced applications such as learning-based control, simulation-driven experimentation, and human-in-the-loop robot interaction.
+More broadly, this work addresses one side of a long-standing challenge in robotics: the **real-to-sim-to-real gap**. Our approach focuses on the first step of the pipeline, aligning simulation with the physical system through **real-to-sim calibration**.
+
+However, even with careful parameter identification, some differences inevitably remain. These residual discrepancies may arise from unmodeled dynamics, manufacturing imperfections, or environmental interactions that are difficult to capture in simulation. In many modern robotics pipelines, these remaining effects are addressed through **sim-to-real adaptation**, where learning-based methods compensate for the residual gap when deploying policies on real hardware.
+
+Together, these approaches form a real-to-sim-to-real loop, in which physics-based simulation provides the structural model while data-driven methods refine the remaining differences. This paradigm enables more reliable deployment of simulation-trained systems on real robots.
 
 ## Media
 Coming soon :)
