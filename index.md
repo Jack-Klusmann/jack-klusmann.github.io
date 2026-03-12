@@ -8,7 +8,7 @@ layout: default
 <div class="intro">
   <div class="intro-text" markdown="1">
 
-Hi, my name is Jack Klusmann. I’m a robotics & physical AI research engineer passionate about leveraging machine learning to create meaningful human–robot interaction. My goal is to help bring robots into everyday life as both assistive partners and intuitive companions.
+Hi, my name is Jack Klusmann. I’m a robotics research engineer passionate about leveraging machine learning to create meaningful human–robot interaction. My goal is to help bring robots into everyday life as both assistive partners and intuitive companions.
 
 My recent research has focused on soft robots, built from flexible and compliant materials. These systems hold great promise for human-centered robotics, combining adaptable object grasping with inherent safety around humans. At the same time, their flexibility makes their behavior much harder to model than that of rigid robots. For this reason, I recently developed an end-to-end control framework for a variable-curvature soft continuum robot, with the aim of linking user intent directly to robot actuation.
 
